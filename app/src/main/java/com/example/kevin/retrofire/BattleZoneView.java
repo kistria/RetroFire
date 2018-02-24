@@ -16,7 +16,7 @@ public class BattleZoneView extends SurfaceView implements SurfaceHolder.Callbac
 
         thread = new GameLoopThread(this);
 
-        // Permet l'appel aux mathodes surfaceCreated, changed et destroyed.
+        // Permet l'appel aux méthodes surfaceCreated, changed et destroyed.
         getHolder().addCallback(this);
 
         setWillNotDraw(false);

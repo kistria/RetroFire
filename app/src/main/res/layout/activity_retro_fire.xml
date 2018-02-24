@@ -26,8 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:onClick="onCardClicked" />
+            android:layout_weight="1" />
 
         <ImageButton
             android:id="@+id/card2"
@@ -35,8 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:onClick="onCardClicked" />
+            android:layout_weight="1" />
 
         <ImageButton
             android:id="@+id/card3"
@@ -45,16 +43,14 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:onClick="onCardClicked" />
+            android:layout_weight="1" />
 
         <ImageButton
             android:id="@+id/card4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:onClick="onCardClicked" />
+            android:layout_weight="1" />
 
     </LinearLayout>
 
