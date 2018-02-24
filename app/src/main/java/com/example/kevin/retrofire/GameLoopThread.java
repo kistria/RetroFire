@@ -2,6 +2,7 @@ package com.example.kevin.retrofire;
 
 
 import android.graphics.Canvas;
+import android.util.Log;
 import android.view.SurfaceHolder;
 
 public class GameLoopThread extends Thread {
@@ -42,6 +43,7 @@ public class GameLoopThread extends Thread {
                         try {
                             Thread.sleep(sleepTime);
                         } catch (InterruptedException e) {
+                            Log.e(getClass().getName(), "Error Thread sleep");
                         }
                     }
 

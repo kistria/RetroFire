@@ -20,8 +20,7 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
         setContentView(R.layout.activity_retro_fire);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        DisplayMetrics metrics = getResources().getDisplayMetrics();
-        this.model = new BattleZoneModel(metrics.widthPixels, metrics.heightPixels);
+        this.model = new BattleZoneModel();
         BattleZoneView view = findViewById(R.id.battleZone);
         view.setModel(this.model);
 
@@ -63,7 +62,7 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
                 break;
 
             case DragEvent.ACTION_DRAG_ENDED:
-                model.addPlayerCard(new Ship(x, y, 100, 3));
+                model.addPlayerCard(new Ship(x, y, 100, Card.Speed.FAST, Card.Direction.RIGHT));
                 break;
 
             case DragEvent.ACTION_DROP:

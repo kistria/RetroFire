@@ -9,23 +9,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BattleZoneModel {
-    private final int width;
-    private final int height;
+    private int width;
+    private int height;
     private transient Paint paint = new Paint();
 
-    private final List<Ship> enemies;
-    private final List<Ship> playerCards;
+    private final List<Card> enemies;
+    private final List<Card> playerCards;
 
-    public BattleZoneModel(int width, int height) {
-        this.width = width;
-        this.height = height;
+    public BattleZoneModel() {
         this.enemies = new ArrayList<>();
         this.playerCards = new ArrayList<>();
     }
 
-    //TODO CRER INTEERFACE CARD ET CHANGER NOM
-    public void addPlayerCard(Ship ship) {
-        playerCards.add(ship);
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void addPlayerCard(Card card) {
+        playerCards.add(card);
     }
 
     public void drawAll(Canvas canvas) {
@@ -34,12 +39,15 @@ public class BattleZoneModel {
 
         playerCards.forEach(card -> card.draw(bufferCanvas));
 
-        int offsetWidth = (canvas.getWidth() - width) / 2 + 200; //TODO
-        int offsetHeight = (canvas.getHeight() - height) / 2;
-        canvas.drawBitmap(bufferBitmap, offsetWidth, offsetHeight, paint);
+        canvas.drawBitmap(bufferBitmap, 0, 0, paint);
+    }
+
+    private void checkEdgesCollision() {
+        playerCards.removeIf(card -> card.checkEdgesCollision(width, height));
     }
 
     public void update() {
-        playerCards.forEach(Ship::update);
+        playerCards.forEach(Card::update);
+        checkEdgesCollision();
     }
 }
