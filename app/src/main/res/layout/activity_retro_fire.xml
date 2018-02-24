@@ -8,9 +8,9 @@
     tools:context="com.example.kevin.retrofire.RetroFire">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="0.1"
         android:orientation="vertical">
 
         <TextView
@@ -61,35 +61,47 @@
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_weight="5">
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-
-    <ProgressBar
-            android:id="@+id/hp"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/pseudo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Choco"
-            android:textColor="@android:color/background_light" />
 
-        <TextView
-            android:id="@+id/score"
+            <ProgressBar
+                android:id="@+id/hp"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/pseudo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Choco"
+                android:textColor="@android:color/background_light" />
+
+            <TextView
+                android:id="@+id/score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Score : 99999"
+                android:textColor="@android:color/background_light" />
+
+        </LinearLayout>
+
+        <com.example.kevin.retrofire.BattleZoneView
+            android:id="@+id/battleZone"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Score : 99999"
-            android:textColor="@android:color/background_light" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
