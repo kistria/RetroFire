@@ -28,10 +28,10 @@ public class BattleZoneView extends SurfaceView implements SurfaceHolder.Callbac
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        thread.setRunning(true);
-        thread.start();
         model.setHeight(this.getHeight());
         model.setWidth(this.getWidth());
+        thread.setRunning(true);
+        thread.start();
     }
 
     @Override

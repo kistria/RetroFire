@@ -33,21 +33,33 @@ public class BattleZoneModel {
         playerCards.add(card);
     }
 
+    /*public void addEnemy() {
+        Random r = new Random();
+
+        int posX = width - Card.WIDTH;
+        int posY = r.nextInt(height - Card.HEIGHT);
+
+        enemies.add(new Ship(posX, posY, 10, Card.Speed.LOW, Card.Direction.LEFT));
+    }*/
+
     public void drawAll(Canvas canvas) {
         Bitmap bufferBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas bufferCanvas = new Canvas(bufferBitmap);
 
         playerCards.forEach(card -> card.draw(bufferCanvas));
+        enemies.forEach(enemy -> enemy.draw(bufferCanvas));
 
         canvas.drawBitmap(bufferBitmap, 0, 0, paint);
     }
 
     private void checkEdgesCollision() {
         playerCards.removeIf(card -> card.checkEdgesCollision(width, height));
+        enemies.removeIf(enemy -> enemy.checkEdgesCollision(width, height));
     }
 
     public void update() {
         playerCards.forEach(Card::update);
+        enemies.forEach(Card::update);
         checkEdgesCollision();
     }
 }

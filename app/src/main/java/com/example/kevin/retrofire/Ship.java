@@ -5,9 +5,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 public class Ship implements Card {
-    private static final int WIDTH = 100;
-    private static final int HEIGHT = 100;
-
     private int positionX;
     private int positionY;
     private int life;
@@ -21,11 +18,11 @@ public class Ship implements Card {
         this.life = life;
         this.speed = speed;
         this.direction = direction;
+        paint.setColor(Color.BLUE);
     }
 
     @Override
     public void draw(Canvas canvas) {
-        paint.setColor(Color.BLUE);
         canvas.drawRect(positionX, positionY, positionX + WIDTH, positionY + HEIGHT, paint);
     }
 

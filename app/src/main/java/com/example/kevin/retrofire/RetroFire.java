@@ -3,7 +3,6 @@ package com.example.kevin.retrofire;
 import android.app.Activity;
 import android.content.ClipData;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -62,7 +61,7 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
                 break;
 
             case DragEvent.ACTION_DRAG_ENDED:
-                model.addPlayerCard(new Ship(x, y, 100, Card.Speed.FAST, Card.Direction.RIGHT));
+                model.addPlayerCard(new Ship(x, y, 10, Card.Speed.FAST, Card.Direction.RIGHT));
                 break;
 
             case DragEvent.ACTION_DROP:
