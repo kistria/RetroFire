@@ -10,7 +10,8 @@ public class Ship implements Card {
     private int life;
     private final Speed speed;
     private final Direction direction;
-    private static Paint paint = new Paint();
+    private static final Paint paint = new Paint();
+    private final Weapon weapon;
 
     public Ship(int positionX, int positionY, int life, Speed speed, Direction direction) {
         this.positionX = positionX;
@@ -18,12 +19,15 @@ public class Ship implements Card {
         this.life = life;
         this.speed = speed;
         this.direction = direction;
+        this.weapon = new Weapon(Weapon.RateOfFire.LOW, direction);
         paint.setColor(Color.BLUE);
     }
 
     @Override
     public void draw(Canvas canvas) {
         canvas.drawRect(positionX, positionY, positionX + WIDTH, positionY + HEIGHT, paint);
+
+        weapon.draw(canvas);
     }
 
     @Override
@@ -41,7 +45,7 @@ public class Ship implements Card {
     }
 
     @Override
-    public void update() {
+    public void update(int width, int height) {
         switch (direction) {
             case LEFT:
                 positionX -= speed.getValue();
@@ -49,6 +53,14 @@ public class Ship implements Card {
             case RIGHT:
                 positionX += speed.getValue();
                 break;
+        }
+
+        weapon.update(width, height);
+
+        if (Direction.RIGHT == direction) {
+            weapon.fire(positionX + WIDTH, positionY + HEIGHT / 2);
+        } else {
+            weapon.fire(positionX, positionY + HEIGHT / 2);
         }
     }
 }

@@ -7,6 +7,7 @@ import android.graphics.Paint;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class BattleZoneModel {
     private int width;
@@ -15,6 +16,8 @@ public class BattleZoneModel {
 
     private final List<Card> enemies;
     private final List<Card> playerCards;
+    private int rateOfEnemySpawn = 100;
+    private int cmpt = 0;
 
     public BattleZoneModel() {
         this.enemies = new ArrayList<>();
@@ -33,14 +36,14 @@ public class BattleZoneModel {
         playerCards.add(card);
     }
 
-    /*public void addEnemy() {
+    public void addEnemy() {
         Random r = new Random();
 
         int posX = width - Card.WIDTH;
         int posY = r.nextInt(height - Card.HEIGHT);
 
         enemies.add(new Ship(posX, posY, 10, Card.Speed.LOW, Card.Direction.LEFT));
-    }*/
+    }
 
     public void drawAll(Canvas canvas) {
         Bitmap bufferBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
@@ -58,8 +61,13 @@ public class BattleZoneModel {
     }
 
     public void update() {
-        playerCards.forEach(Card::update);
-        enemies.forEach(Card::update);
+        if (cmpt % rateOfEnemySpawn == 0) {
+            addEnemy();
+        }
+
+        playerCards.forEach(card -> card.update(width, height));
+        enemies.forEach(card -> card.update(width, height));
         checkEdgesCollision();
+        cmpt++;
     }
 }
