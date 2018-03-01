@@ -4,11 +4,24 @@ package com.example.kevin.retrofire;
 import android.graphics.Canvas;
 
 interface Card {
-    //TODO rename Card en Ship et Ship en BasicShip ou je sais pas
     int WIDTH = 100;
     int HEIGHT = 100;
 
+    boolean checkShipCollision(Card card);
+
     void update(int width, int height);
+
+    boolean canRemove();
+
+    boolean isDead();
+
+    int getPositionX();
+
+    int getPositionY();
+
+    Weapon getWeapon();
+
+    void takeDamage(int damage);
 
     enum Speed {
         LOW(2), NORMAL(4), FAST(6);

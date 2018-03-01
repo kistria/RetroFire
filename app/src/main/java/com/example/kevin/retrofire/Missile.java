@@ -43,6 +43,24 @@ public class Missile {
         }
     }
 
+    public boolean hasHit(Card card) {
+        if (Card.Direction.LEFT == direction) {
+            if (positionX <= card.getPositionX() + Card.WIDTH && positionX >= card.getPositionX() && positionY >= card.getPositionY() && positionY <= card.getPositionY() + Card.HEIGHT) {
+                return true;
+            } else if (positionX <= card.getPositionX() + Card.WIDTH && positionX >= card.getPositionX() && positionY + HEIGHT >= card.getPositionY() && positionY + HEIGHT <= card.getPositionY() + Card.HEIGHT) {
+                return true;
+            }
+        } else {
+            if (positionX + WIDTH >= card.getPositionX() && positionX + WIDTH <= card.getPositionX() + Card.WIDTH && positionY >= card.getPositionY() && positionY <= card.getPositionY() + Card.HEIGHT) {
+                return true;
+            } else if (positionX + WIDTH >= card.getPositionX() && positionX + WIDTH <= card.getPositionX() + Card.WIDTH && positionY + HEIGHT >= card.getPositionY() && positionY + HEIGHT <= card.getPositionY() + Card.HEIGHT) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public boolean checkEdgesCollision(int width, int height) {
         if (positionX < 0) {
             return true;

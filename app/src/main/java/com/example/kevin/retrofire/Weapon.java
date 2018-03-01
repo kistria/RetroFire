@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Weapon {
     public enum RateOfFire {
-        LOW(15), NORMAL(10), FAST(5);
+        LOW(50), NORMAL(40), FAST(30);
 
         private final int value;
 
@@ -20,6 +20,8 @@ public class Weapon {
     private final RateOfFire rateOfFire;
     private final List<Missile> missiles;
     private final Card.Direction direction;
+    //TODO enum firePower
+    private int firePower = 10;
     private int cmpt = 0;
 
     public Weapon(RateOfFire rateOfFire, Card.Direction direction) {
@@ -42,5 +44,19 @@ public class Weapon {
     public void update(int width, int height) {
         missiles.forEach(Missile::update);
         missiles.removeIf(missile -> missile.checkEdgesCollision(width, height));
+    }
+
+    public boolean hasHit(Card card) {
+        return missiles.removeIf(missile -> {
+            boolean hit = missile.hasHit(card);
+            if (hit) {
+                card.takeDamage(firePower);
+            }
+            return hit;
+        });
+    }
+
+    public int nbMissile() {
+        return missiles.size();
     }
 }

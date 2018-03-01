@@ -1,8 +1,8 @@
 package com.example.kevin.retrofire;
 
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public class BattleZoneModel {
 
     private final List<Card> enemies;
     private final List<Card> playerCards;
-    private int rateOfEnemySpawn = 100;
+    private int rateOfEnemySpawn = 200;
     private int cmpt = 0;
 
     public BattleZoneModel() {
@@ -42,7 +42,8 @@ public class BattleZoneModel {
         int posX = width - Card.WIDTH;
         int posY = r.nextInt(height - Card.HEIGHT);
 
-        enemies.add(new Ship(posX, posY, 10, Card.Speed.LOW, Card.Direction.LEFT));
+        Weapon weapon = new Weapon(Weapon.RateOfFire.LOW, Card.Direction.LEFT);
+        enemies.add(new Ship(posX, posY, 10, Card.Speed.LOW, Card.Direction.LEFT, weapon, Color.RED));
     }
 
     public void drawAll(Canvas canvas) {
@@ -55,9 +56,19 @@ public class BattleZoneModel {
         canvas.drawBitmap(bufferBitmap, 0, 0, paint);
     }
 
-    private void checkEdgesCollision() {
+    private void checkCollision() {
+        //Check edges collision
         playerCards.removeIf(card -> card.checkEdgesCollision(width, height));
         enemies.removeIf(enemy -> enemy.checkEdgesCollision(width, height));
+
+        //Check ship collision
+        playerCards.removeIf(card -> enemies.removeIf(enemy -> enemy.checkShipCollision(card)));
+
+        //Check player hit ennemy
+        playerCards.forEach(card -> enemies.forEach(enemy -> card.getWeapon().hasHit(enemy)));
+
+        //Check enemy hit player card
+        enemies.forEach(enemies -> playerCards.forEach(card -> enemies.getWeapon().hasHit(card)));
     }
 
     public void update() {
@@ -65,9 +76,26 @@ public class BattleZoneModel {
             addEnemy();
         }
 
-        playerCards.forEach(card -> card.update(width, height));
-        enemies.forEach(card -> card.update(width, height));
-        checkEdgesCollision();
+        playerCards.removeIf(Card::canRemove);
+        enemies.removeIf(Card::canRemove);
+
+        playerCards.removeIf(card -> {
+            boolean remove = card.canRemove();
+            if (!remove) {
+                card.update(width, height);
+            }
+            return remove;
+        });
+
+        enemies.removeIf(card -> {
+            boolean remove = card.canRemove();
+            if (!remove) {
+                card.update(width, height);
+            }
+            return remove;
+        });
+
+        checkCollision();
         cmpt++;
     }
 }

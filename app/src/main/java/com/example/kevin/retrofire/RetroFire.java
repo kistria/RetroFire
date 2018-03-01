@@ -2,6 +2,7 @@ package com.example.kevin.retrofire;
 
 import android.app.Activity;
 import android.content.ClipData;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.MotionEvent;
@@ -61,7 +62,8 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
                 break;
 
             case DragEvent.ACTION_DRAG_ENDED:
-                model.addPlayerCard(new Ship(x, y, 10, Card.Speed.FAST, Card.Direction.RIGHT));
+                Weapon weapon = new Weapon(Weapon.RateOfFire.NORMAL, Card.Direction.RIGHT);
+                model.addPlayerCard(new Ship(x, y, 10, Card.Speed.NORMAL, Card.Direction.RIGHT, weapon, Color.BLUE));
                 break;
 
             case DragEvent.ACTION_DROP:
