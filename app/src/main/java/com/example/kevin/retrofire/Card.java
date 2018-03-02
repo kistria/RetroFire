@@ -7,16 +7,32 @@ interface Card {
     int WIDTH = 100;
     int HEIGHT = 100;
 
-    enum Speed{
+    boolean checkShipCollision(Card card);
+
+    void update(int width, int height);
+
+    boolean canRemove();
+
+    boolean isDead();
+
+    int getPositionX();
+
+    int getPositionY();
+
+    Weapon getWeapon();
+
+    void takeDamage(int damage);
+
+    enum Speed {
         LOW(2), NORMAL(4), FAST(6);
 
         private final int value;
 
-        Speed(int speed){
+        Speed(int speed) {
             this.value = speed;
         }
 
-        public int getValue(){
+        public int getValue() {
             return value;
         }
     }
@@ -28,6 +44,4 @@ interface Card {
     void draw(Canvas canvas);
 
     boolean checkEdgesCollision(int width, int height);
-
-    void update();
 }
