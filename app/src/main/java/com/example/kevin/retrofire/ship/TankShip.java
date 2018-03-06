@@ -7,7 +7,7 @@ import android.graphics.Paint;
 public class TankShip extends Ship {
 
     public TankShip(int positionX, int positionY, Direction direction, int color) {
-        super(positionX, positionY, Life.TANK.getValue(), Speed.LOW, direction, color, new Weapon(Weapon.RateOfFire.LOW, direction, Weapon.FirePower.STRONG));
+        super(positionX, positionY, Life.TANK.getValue(), Speed.LOW, direction, color, new Weapon(Weapon.RateOfFire.LOW, direction, Weapon.FirePower.STRONG), Cooldown.LOW);
     }
 
     @Override
