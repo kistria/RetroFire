@@ -9,10 +9,15 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.example.kevin.retrofire.card.BasicShipCard;
+import com.example.kevin.retrofire.card.SpeedShipCard;
+import com.example.kevin.retrofire.card.TankShipCard;
+
 public class RetroFire extends Activity implements View.OnTouchListener, View.OnDragListener {
     private BattleZoneModel model = null;
     private int x;
     private int y;
+    private String currentCardId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,7 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
             ClipData data = ClipData.newPlainText("", "");
             View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
             view.startDragAndDrop(data, shadowBuilder, view, 0);
+            currentCardId = view.getResources().getResourceEntryName(view.getId());
             return true;
         } else {
             return false;
@@ -62,8 +68,13 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
                 break;
 
             case DragEvent.ACTION_DRAG_ENDED:
-                Weapon weapon = new Weapon(Weapon.RateOfFire.NORMAL, Card.Direction.RIGHT);
-                model.addPlayerCard(new Ship(x, y, 10, Card.Speed.NORMAL, Card.Direction.RIGHT, weapon, Color.BLUE));
+                if (currentCardId.equals("card1")) {
+                    model.addPlayerCard(new BasicShipCard(x, y, Color.BLUE));
+                } else if (currentCardId.equals("card2")) {
+                    model.addPlayerCard(new SpeedShipCard(x, y, Color.BLUE));
+                } else {
+                    model.addPlayerCard(new TankShipCard(x, y, Color.BLUE));
+                }
                 break;
 
             case DragEvent.ACTION_DROP:
