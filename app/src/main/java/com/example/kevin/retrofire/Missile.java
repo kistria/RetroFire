@@ -13,11 +13,11 @@ public class Missile {
     private int positionX;
     private int positionY;
 
-    private Card.Direction direction;
+    private Ship.Direction direction;
 
     private Paint paint = new Paint();
 
-    public Missile(int positionX, int positionY, Card.Direction direction) {
+    public Missile(int positionX, int positionY, Ship.Direction direction) {
         this.positionX = positionX;
         this.positionY = positionY;
         this.direction = direction;
@@ -25,7 +25,7 @@ public class Missile {
     }
 
     public void draw(Canvas canvas) {
-        if (Card.Direction.RIGHT == direction) {
+        if (Ship.Direction.RIGHT == direction) {
             canvas.drawRect(positionX, positionY, positionX + WIDTH, positionY + HEIGHT, paint);
         } else {
             canvas.drawRect(positionX - WIDTH, positionY, positionX, positionY + HEIGHT, paint);
@@ -43,17 +43,17 @@ public class Missile {
         }
     }
 
-    public boolean hasHit(Card card) {
-        if (Card.Direction.LEFT == direction) {
-            if (positionX <= card.getPositionX() + Card.WIDTH && positionX >= card.getPositionX() && positionY >= card.getPositionY() && positionY <= card.getPositionY() + Card.HEIGHT) {
+    public boolean hasHit(Ship ship) {
+        if (Ship.Direction.LEFT == direction) {
+            if (positionX - WIDTH <= ship.getPositionX() + Ship.getWIDTH() && positionX - WIDTH >= ship.getPositionX() && positionY >= ship.getPositionY() && positionY <= ship.getPositionY() + Ship.getHEIGHT()) {
                 return true;
-            } else if (positionX <= card.getPositionX() + Card.WIDTH && positionX >= card.getPositionX() && positionY + HEIGHT >= card.getPositionY() && positionY + HEIGHT <= card.getPositionY() + Card.HEIGHT) {
+            } else if (positionX <= ship.getPositionX() + Ship.getWIDTH() && positionX >= ship.getPositionX() && positionY + HEIGHT >= ship.getPositionY() && positionY + HEIGHT <= ship.getPositionY() + Ship.getHEIGHT()) {
                 return true;
             }
         } else {
-            if (positionX + WIDTH >= card.getPositionX() && positionX + WIDTH <= card.getPositionX() + Card.WIDTH && positionY >= card.getPositionY() && positionY <= card.getPositionY() + Card.HEIGHT) {
+            if (positionX + WIDTH >= ship.getPositionX() && positionX + WIDTH <= ship.getPositionX() + Ship.getWIDTH() && positionY >= ship.getPositionY() && positionY <= ship.getPositionY() + Ship.getHEIGHT()) {
                 return true;
-            } else if (positionX + WIDTH >= card.getPositionX() && positionX + WIDTH <= card.getPositionX() + Card.WIDTH && positionY + HEIGHT >= card.getPositionY() && positionY + HEIGHT <= card.getPositionY() + Card.HEIGHT) {
+            } else if (positionX + WIDTH >= ship.getPositionX() && positionX + WIDTH <= ship.getPositionX() + Ship.getWIDTH() && positionY + HEIGHT >= ship.getPositionY() && positionY + HEIGHT <= ship.getPositionY() + Ship.getHEIGHT()) {
                 return true;
             }
         }

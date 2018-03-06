@@ -1,39 +1,32 @@
 package com.example.kevin.retrofire;
 
-import android.graphics.Canvas;
-import android.graphics.Paint;
 
-public class Ship implements Card {
+import android.graphics.Canvas;
+
+public abstract class Ship {
+    private static final int WIDTH = 100;
+    private static final int HEIGHT = 100;
+
     private int positionX;
     private int positionY;
     private int life;
     private final Speed speed;
     private final Direction direction;
-    private int color;
+    protected int color;
     private final Weapon weapon;
 
-    public Ship(int positionX, int positionY, int life, Speed speed, Direction direction, Weapon weapon, int color) {
+    public Ship(int positionX, int positionY, int life, Speed speed, Direction direction, int color, Weapon weapon) {
         this.positionX = positionX;
         this.positionY = positionY;
         this.life = life;
         this.speed = speed;
         this.direction = direction;
-        this.weapon = weapon;
         this.color = color;
+        this.weapon = weapon;
     }
 
-    @Override
-    public void draw(Canvas canvas) {
-        weapon.draw(canvas);
+    public abstract void draw(Canvas canvas);
 
-        if (!isDead()) {
-            Paint paint = new Paint();
-            paint.setColor(color);
-            canvas.drawRect(positionX, positionY, positionX + WIDTH, positionY + HEIGHT, paint);
-        }
-    }
-
-    @Override
     public boolean checkEdgesCollision(int width, int height) {
         if (positionX < 0) {
             return true;
@@ -47,18 +40,17 @@ public class Ship implements Card {
         return false;
     }
 
-    @Override
-    public boolean checkShipCollision(Card card) {
-        if (Card.Direction.LEFT == direction) {
-            if (positionX <= card.getPositionX() + Card.WIDTH && positionX >= card.getPositionX() && positionY >= card.getPositionY() && positionY <= card.getPositionY() + Card.HEIGHT) {
+    public boolean checkShipCollision(Ship ship) {
+        if (Ship.Direction.LEFT == direction) {
+            if (positionX <= ship.getPositionX() + getWIDTH() && positionX >= ship.getPositionX() && positionY >= ship.getPositionY() && positionY <= ship.getPositionY() + getHEIGHT()) {
                 return true;
-            } else if (positionX <= card.getPositionX() + Card.WIDTH && positionX >= card.getPositionX() && positionY + HEIGHT >= card.getPositionY() && positionY + HEIGHT <= card.getPositionY() + Card.HEIGHT) {
+            } else if (positionX <= ship.getPositionX() + getWIDTH() && positionX >= ship.getPositionX() && positionY + HEIGHT >= ship.getPositionY() && positionY + HEIGHT <= ship.getPositionY() + getHEIGHT()) {
                 return true;
             }
         } else {
-            if (positionX + WIDTH >= card.getPositionX() && positionX + WIDTH <= card.getPositionX() + Card.WIDTH && positionY >= card.getPositionY() && positionY <= card.getPositionY() + Card.HEIGHT) {
+            if (positionX + WIDTH >= ship.getPositionX() && positionX + WIDTH <= ship.getPositionX() + getWIDTH() && positionY >= ship.getPositionY() && positionY <= ship.getPositionY() + getHEIGHT()) {
                 return true;
-            } else if (positionX + WIDTH >= card.getPositionX() && positionX + WIDTH <= card.getPositionX() + Card.WIDTH && positionY + HEIGHT >= card.getPositionY() && positionY + HEIGHT <= card.getPositionY() + Card.HEIGHT) {
+            } else if (positionX + WIDTH >= ship.getPositionX() && positionX + WIDTH <= ship.getPositionX() + getWIDTH() && positionY + HEIGHT >= ship.getPositionY() && positionY + HEIGHT <= ship.getPositionY() + getHEIGHT()) {
                 return true;
             }
         }
@@ -66,7 +58,6 @@ public class Ship implements Card {
         return false;
     }
 
-    @Override
     public void update(int width, int height) {
         weapon.update(width, height);
 
@@ -88,33 +79,67 @@ public class Ship implements Card {
         }
     }
 
-    @Override
     public boolean canRemove() {
         return isDead() && weapon.nbMissile() == 0;
     }
 
-    @Override
     public boolean isDead() {
         return life <= 0;
     }
 
-    @Override
     public int getPositionX() {
         return positionX;
     }
 
-    @Override
     public int getPositionY() {
         return positionY;
     }
 
-    @Override
+    public static int getWIDTH() {
+        return WIDTH;
+    }
+
+    public static int getHEIGHT() {
+        return HEIGHT;
+    }
+
     public Weapon getWeapon() {
         return weapon;
     }
 
-    @Override
     public void takeDamage(int damage) {
         this.life -= damage;
+    }
+
+    enum Speed {
+        LOW(2), NORMAL(4), FAST(6);
+
+        private final int value;
+
+        Speed(int speed) {
+            this.value = speed;
+        }
+
+        public int getValue() {
+            return value;
+        }
+    }
+
+    enum Life {
+        LOW(10), NORMAL(20), TANK(40);
+
+        private final int value;
+
+        Life(int life) {
+            this.value = life;
+        }
+
+        public int getValue() {
+            return value;
+        }
+    }
+
+    enum Direction {
+        LEFT, RIGHT
     }
 }

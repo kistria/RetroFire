@@ -13,6 +13,7 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
     private BattleZoneModel model = null;
     private int x;
     private int y;
+    private String currentCardId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
             ClipData data = ClipData.newPlainText("", "");
             View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
             view.startDragAndDrop(data, shadowBuilder, view, 0);
+            currentCardId = view.getResources().getResourceEntryName(view.getId());
             return true;
         } else {
             return false;
@@ -62,8 +64,13 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
                 break;
 
             case DragEvent.ACTION_DRAG_ENDED:
-                Weapon weapon = new Weapon(Weapon.RateOfFire.NORMAL, Card.Direction.RIGHT);
-                model.addPlayerCard(new Ship(x, y, 10, Card.Speed.NORMAL, Card.Direction.RIGHT, weapon, Color.BLUE));
+                if (currentCardId.equals("card1")) {
+                    model.addPlayerCard(new BasicShip(x, y, Ship.Direction.RIGHT, Color.BLUE));
+                } else if (currentCardId.equals("card2")) {
+                    model.addPlayerCard(new SpeedShip(x, y, Ship.Direction.RIGHT, Color.BLUE));
+                } else {
+                    model.addPlayerCard(new TankShip(x, y, Ship.Direction.RIGHT, Color.BLUE));
+                }
                 break;
 
             case DragEvent.ACTION_DROP:

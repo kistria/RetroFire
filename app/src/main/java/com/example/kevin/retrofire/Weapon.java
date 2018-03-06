@@ -3,31 +3,22 @@ package com.example.kevin.retrofire;
 
 import android.graphics.Canvas;
 
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Weapon {
-    public enum RateOfFire {
-        LOW(50), NORMAL(40), FAST(30);
-
-        private final int value;
-
-        RateOfFire(int value) {
-            this.value = value;
-        }
-    }
-
     private final RateOfFire rateOfFire;
     private final List<Missile> missiles;
-    private final Card.Direction direction;
-    //TODO enum firePower
-    private int firePower = 10;
+    private Ship.Direction direction;
+    private FirePower firePower;
     private int cmpt = 0;
 
-    public Weapon(RateOfFire rateOfFire, Card.Direction direction) {
+    public Weapon(RateOfFire rateOfFire, Ship.Direction direction, FirePower firePower) {
         this.rateOfFire = rateOfFire;
         this.missiles = new ArrayList<>();
         this.direction = direction;
+        this.firePower = firePower;
     }
 
     public void fire(int positionX, int positionY) {
@@ -46,11 +37,11 @@ public class Weapon {
         missiles.removeIf(missile -> missile.checkEdgesCollision(width, height));
     }
 
-    public boolean hasHit(Card card) {
+    public boolean hasHit(Ship ship) {
         return missiles.removeIf(missile -> {
-            boolean hit = missile.hasHit(card);
+            boolean hit = missile.hasHit(ship);
             if (hit) {
-                card.takeDamage(firePower);
+                ship.takeDamage(firePower.value);
             }
             return hit;
         });
@@ -59,4 +50,25 @@ public class Weapon {
     public int nbMissile() {
         return missiles.size();
     }
+
+    public enum RateOfFire {
+        LOW(50), NORMAL(40), FAST(10);
+
+        private final int value;
+
+        RateOfFire(int value) {
+            this.value = value;
+        }
+    }
+
+    public enum FirePower {
+        LOW(5), NORMAL(10), STRONG(20);
+
+        private final int value;
+
+        FirePower(int value) {
+            this.value = value;
+        }
+    }
+
 }
