@@ -1,9 +1,11 @@
-package com.example.kevin.retrofire;
+package com.example.kevin.retrofire.ship;
 
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+
+import com.example.kevin.retrofire.ship.Ship;
 
 public class Missile {
     private static int WIDTH = 40;

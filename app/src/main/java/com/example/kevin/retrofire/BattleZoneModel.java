@@ -5,6 +5,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import com.example.kevin.retrofire.card.Card;
+import com.example.kevin.retrofire.ship.BasicShip;
+import com.example.kevin.retrofire.ship.Ship;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -15,13 +19,13 @@ public class BattleZoneModel {
     private transient Paint paint = new Paint();
 
     private final List<Ship> enemies;
-    private final List<Ship> playerShips;
+    private final List<Card> playerCards;
     private int rateOfEnemySpawn = 200;
     private int cmpt = 0;
 
     public BattleZoneModel() {
         this.enemies = new ArrayList<>();
-        this.playerShips = new ArrayList<>();
+        this.playerCards = new ArrayList<>();
     }
 
     public void setWidth(int width) {
@@ -32,8 +36,8 @@ public class BattleZoneModel {
         this.height = height;
     }
 
-    public void addPlayerCard(Ship ship) {
-        playerShips.add(ship);
+    public void addPlayerCard(Card card) {
+        playerCards.add(card);
     }
 
     public void addEnemy() {
@@ -48,7 +52,7 @@ public class BattleZoneModel {
         Bitmap bufferBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas bufferCanvas = new Canvas(bufferBitmap);
 
-        playerShips.forEach(card -> card.draw(bufferCanvas));
+        playerCards.forEach(card -> card.draw(bufferCanvas));
         enemies.forEach(enemy -> enemy.draw(bufferCanvas));
 
         canvas.drawBitmap(bufferBitmap, 0, 0, paint);
@@ -56,17 +60,17 @@ public class BattleZoneModel {
 
     private void checkCollision() {
         //Check edges collision
-        playerShips.removeIf(card -> card.checkEdgesCollision(width, height));
+        playerCards.removeIf(card -> card.getShip().checkEdgesCollision(width, height));
         enemies.removeIf(enemy -> enemy.checkEdgesCollision(width, height));
 
         //Check ship collision
-        playerShips.removeIf(card -> enemies.removeIf(enemy -> enemy.checkShipCollision(card)));
+        playerCards.removeIf(card -> enemies.removeIf(enemy -> enemy.checkShipCollision(card.getShip())));
 
         //Check player hit ennemy
-        playerShips.forEach(card -> enemies.forEach(enemy -> card.getWeapon().hasHit(enemy)));
+        playerCards.forEach(card -> enemies.forEach(enemy -> card.getShip().getWeapon().hasHit(enemy)));
 
         //Check enemy hit player card
-        enemies.forEach(enemies -> playerShips.forEach(card -> enemies.getWeapon().hasHit(card)));
+        enemies.forEach(enemies -> playerCards.forEach(card -> enemies.getWeapon().hasHit(card.getShip())));
     }
 
     public void update() {
@@ -74,13 +78,13 @@ public class BattleZoneModel {
             addEnemy();
         }
 
-        playerShips.removeIf(Ship::canRemove);
+        playerCards.removeIf(card -> card.getShip().canRemove());
         enemies.removeIf(Ship::canRemove);
 
-        playerShips.removeIf(card -> {
-            boolean remove = card.canRemove();
+        playerCards.removeIf(card -> {
+            boolean remove = card.getShip().canRemove();
             if (!remove) {
-                card.update(width, height);
+                card.getShip().update(width, height);
             }
             return remove;
         });

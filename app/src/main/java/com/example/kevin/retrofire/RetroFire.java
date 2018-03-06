@@ -9,6 +9,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.example.kevin.retrofire.card.BasicShipCard;
+import com.example.kevin.retrofire.card.SpeedShipCard;
+import com.example.kevin.retrofire.card.TankShipCard;
+
 public class RetroFire extends Activity implements View.OnTouchListener, View.OnDragListener {
     private BattleZoneModel model = null;
     private int x;
@@ -65,11 +69,11 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
 
             case DragEvent.ACTION_DRAG_ENDED:
                 if (currentCardId.equals("card1")) {
-                    model.addPlayerCard(new BasicShip(x, y, Ship.Direction.RIGHT, Color.BLUE));
+                    model.addPlayerCard(new BasicShipCard(x, y, Color.BLUE));
                 } else if (currentCardId.equals("card2")) {
-                    model.addPlayerCard(new SpeedShip(x, y, Ship.Direction.RIGHT, Color.BLUE));
+                    model.addPlayerCard(new SpeedShipCard(x, y, Color.BLUE));
                 } else {
-                    model.addPlayerCard(new TankShip(x, y, Ship.Direction.RIGHT, Color.BLUE));
+                    model.addPlayerCard(new TankShipCard(x, y, Color.BLUE));
                 }
                 break;
 

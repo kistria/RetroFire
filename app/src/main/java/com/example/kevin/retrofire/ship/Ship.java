@@ -1,4 +1,4 @@
-package com.example.kevin.retrofire;
+package com.example.kevin.retrofire.ship;
 
 
 import android.graphics.Canvas;
@@ -139,7 +139,7 @@ public abstract class Ship {
         }
     }
 
-    enum Direction {
+    public enum Direction {
         LEFT, RIGHT
     }
 }

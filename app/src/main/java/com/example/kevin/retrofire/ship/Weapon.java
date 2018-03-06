@@ -1,9 +1,8 @@
-package com.example.kevin.retrofire;
+package com.example.kevin.retrofire.ship;
 
 
 import android.graphics.Canvas;
 
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
