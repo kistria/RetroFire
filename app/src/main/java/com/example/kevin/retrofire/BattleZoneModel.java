@@ -23,10 +23,21 @@ public class BattleZoneModel {
     private int rateOfEnemySpawn = 200;
     private int cmpt = 0;
 
+    private int hpBar = 100;
+    private int score = 0;
+
     public BattleZoneModel() {
         this.enemies = new ArrayList<>();
         this.playerCards = new ArrayList<>();
     }
+
+    public int getHpBar(){
+        return hpBar;
+    }
+
+    public int getScore () {return score;}
+
+    public void setScore (int score) { this.score = score;}
 
     public void setWidth(int width) {
         this.width = width;
@@ -61,6 +72,14 @@ public class BattleZoneModel {
     private void checkCollision() {
         //Check edges collision
         playerCards.removeIf(card -> card.getShip().checkEdgesCollision(width, height));
+
+        // lose life when an enemy reach the left side
+        enemies.forEach(enemy -> {
+            if(enemy.checkEdgesCollision(width, height)){
+                hpBar-=10;
+            }
+        });
+        //Check enemies edges collision
         enemies.removeIf(enemy -> enemy.checkEdgesCollision(width, height));
 
         //Check ship collision

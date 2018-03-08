@@ -8,6 +8,8 @@ import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.kevin.retrofire.card.BasicShipCard;
 import com.example.kevin.retrofire.card.SpeedShipCard;
@@ -18,6 +20,8 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
     private int x;
     private int y;
     private String currentCardId;
+    private ProgressBar hp;
+    private TextView scoreView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +33,39 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
         BattleZoneView view = findViewById(R.id.battleZone);
         view.setModel(this.model);
 
+        hp = findViewById(R.id.hp);
+        hp.setMax(100);
+        hp.setProgress(100);
+
+        scoreView = findViewById(R.id.score);
         findViewById(R.id.card1).setOnTouchListener(this);
         findViewById(R.id.card2).setOnTouchListener(this);
         findViewById(R.id.card3).setOnTouchListener(this);
         findViewById(R.id.card4).setOnTouchListener(this);
 
         view.setOnDragListener(this);
+
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted()) {
+                        Thread.sleep(100);
+                        runOnUiThread(() -> {
+                            int score = model.getScore();
+                            scoreView.setText(String.format("%06d",  score));
+                            model.setScore(++score);
+                            hp.setProgress(model.getHpBar());
+                        });
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        t.start();
     }
+
 
     @Override
     public boolean onTouch(View view, MotionEvent event) {
@@ -84,4 +114,5 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
         }
         return true;
     }
+
 }

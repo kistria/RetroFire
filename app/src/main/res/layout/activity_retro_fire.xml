@@ -19,13 +19,16 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="RetroFire"
+            android:padding="10dp"
             android:textColor="@android:color/background_light" />
 
         <ImageButton
             android:id="@+id/card1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_weight="1" />
 
         <ImageButton
@@ -76,15 +79,24 @@
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="3"
+                android:visibility="visible"
+                android:progressDrawable="@drawable/progress_bar"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginBottom="10dp"
+                android:paddingTop="1dp"
+                tools:visibility="visible"/>
 
             <TextView
                 android:id="@+id/pseudo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:text="Choco"
+                android:gravity="right"
+                android:text="Pseudo"
                 android:textColor="@android:color/background_light" />
 
             <TextView
@@ -92,7 +104,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="right"
+                android:layout_margin="10dp"
                 android:text="Score : 99999"
                 android:textColor="@android:color/background_light" />
 
