@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="0.1"
+        android:layout_weight="0"
         android:orientation="vertical">
 
         <TextView
@@ -21,36 +21,40 @@
             android:text="RetroFire"
             android:textColor="@android:color/background_light" />
 
-        <ImageButton
+        <Button
             android:id="@+id/card1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text=""/>
 
-        <ImageButton
+        <Button
             android:id="@+id/card2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text=""/>
 
-        <ImageButton
+        <Button
             android:id="@+id/card3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text=""/>
 
-        <ImageButton
+        <Button
             android:id="@+id/card4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text=""/>
 
     </LinearLayout>
 

@@ -22,4 +22,9 @@ public class TankShipCard implements Card {
     public Ship getShip() {
         return tankShip;
     }
+
+    @Override
+    public Cooldown getCooldown() {
+        return Cooldown.LOW;
+    }
 }

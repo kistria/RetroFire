@@ -7,7 +7,7 @@ import android.graphics.Paint;
 public class SpeedShip extends Ship {
 
     public SpeedShip(int positionX, int positionY, Direction direction, int color) {
-        super(positionX, positionY, Life.LOW.getValue(), Speed.FAST, direction, color, new Weapon(Weapon.RateOfFire.FAST, direction, Weapon.FirePower.LOW), Cooldown.NORMAL);
+        super(positionX, positionY, Life.LOW.getValue(), Speed.FAST, direction, color, new Weapon(Weapon.RateOfFire.FAST, direction, Weapon.FirePower.LOW));
 
     }
 

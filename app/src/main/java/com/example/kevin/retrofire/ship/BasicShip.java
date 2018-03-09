@@ -6,7 +6,7 @@ import android.graphics.Paint;
 public class BasicShip extends Ship {
 
     public BasicShip(int positionX, int positionY, Direction direction, int color) {
-        super(positionX, positionY, Life.NORMAL.getValue(), Speed.NORMAL, direction, color, new Weapon(Weapon.RateOfFire.NORMAL, direction, Weapon.FirePower.NORMAL),Cooldown.NORMAL);
+        super(positionX, positionY, Life.NORMAL.getValue(), Speed.NORMAL, direction, color, new Weapon(Weapon.RateOfFire.NORMAL, direction, Weapon.FirePower.NORMAL));
     }
 
     @Override

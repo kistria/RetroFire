@@ -14,9 +14,8 @@ public abstract class Ship {
     private final Direction direction;
     protected int color;
     private final Weapon weapon;
-    private final Cooldown cd;
 
-    public Ship(int positionX, int positionY, int life, Speed speed, Direction direction, int color, Weapon weapon, Cooldown cd) {
+    public Ship(int positionX, int positionY, int life, Speed speed, Direction direction, int color, Weapon weapon) {
         this.positionX = positionX;
         this.positionY = positionY;
         this.life = life;
@@ -24,7 +23,6 @@ public abstract class Ship {
         this.direction = direction;
         this.color = color;
         this.weapon = weapon;
-        this.cd = cd;
     }
 
     public abstract void draw(Canvas canvas);
@@ -145,14 +143,4 @@ public abstract class Ship {
         LEFT, RIGHT
     }
 
-    // payback
-    enum Cooldown {
-        LOW(4), NORMAL(2);
-
-        private final int value;
-
-        Cooldown(int cd) { this.value = cd; }
-
-        public int getValue() { return value; }
-    }
 }
