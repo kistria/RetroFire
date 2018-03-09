@@ -2,7 +2,12 @@ package com.example.kevin.retrofire;
 
 import android.app.Activity;
 import android.content.ClipData;
+import android.content.Context;
 import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.MotionEvent;
@@ -15,13 +20,15 @@ import com.example.kevin.retrofire.card.BasicShipCard;
 import com.example.kevin.retrofire.card.SpeedShipCard;
 import com.example.kevin.retrofire.card.TankShipCard;
 
-public class RetroFire extends Activity implements View.OnTouchListener, View.OnDragListener {
+public class RetroFire extends Activity implements View.OnTouchListener, View.OnDragListener, SensorEventListener {
     private BattleZoneModel model = null;
     private int x;
     private int y;
     private String currentCardId;
     private ProgressBar hp;
     private TextView scoreView;
+    private SensorManager sensorManager;
+    private Sensor accelerometer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +49,9 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
         findViewById(R.id.card2).setOnTouchListener(this);
         findViewById(R.id.card3).setOnTouchListener(this);
         findViewById(R.id.card4).setOnTouchListener(this);
+
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         view.setOnDragListener(this);
 
@@ -115,4 +125,27 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
         return true;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(this);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+        if(sensorEvent.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
+            model.accelerometerChange((int)sensorEvent.values[0]-5);
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {
+
+    }
 }
