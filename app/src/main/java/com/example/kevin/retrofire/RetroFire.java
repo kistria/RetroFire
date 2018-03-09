@@ -18,6 +18,10 @@ import com.example.kevin.retrofire.card.BasicShipCard;
 import com.example.kevin.retrofire.card.SpeedShipCard;
 import com.example.kevin.retrofire.card.TankShipCard;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class RetroFire extends Activity implements View.OnTouchListener, View.OnDragListener {
     private BattleZoneModel model = null;
     private int x;
@@ -25,6 +29,7 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
     private String currentCardId;
     private Button card1, card2, card3, card4;
     private int secondsLeft = 0;
+    private List<Button> listPlayerCard = new ArrayList<>();
 
     private static final String TAG= "RetroFireActivity";
 
@@ -42,6 +47,9 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
         card2 =findViewById(R.id.card2);
         card3 = findViewById(R.id.card3);
         card4 = findViewById(R.id.card4);
+
+        listPlayerCard.addAll(Arrays.asList(card1,card2,card3,card4));
+
         findViewById(R.id.card1).setOnTouchListener(this);
         findViewById(R.id.card2).setOnTouchListener(this);
         findViewById(R.id.card3).setOnTouchListener(this);
@@ -84,16 +92,15 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
                 if (currentCardId.equals("card1")) {
                     BasicShipCard basicCard = new BasicShipCard(x, y, Color.BLUE);
                     model.addPlayerCard(basicCard);
-
-                    startCooldown(basicCard.getCooldown().getValue(),card1);
+                    startCooldown(basicCard.getCooldown().getValue());
                 } else if (currentCardId.equals("card2")) {
                     SpeedShipCard speedCard = new SpeedShipCard(x, y, Color.BLUE);
                     model.addPlayerCard(speedCard);
-                    startCooldown(speedCard.getCooldown().getValue(),card2);
-                } else {
+                    startCooldown(speedCard.getCooldown().getValue());
+                } else if (currentCardId.equals("card3")){
                     TankShipCard tankCard = new TankShipCard(x, y, Color.BLUE);
                     model.addPlayerCard(tankCard);
-                    startCooldown(tankCard.getCooldown().getValue(), card3);
+                    startCooldown(tankCard.getCooldown().getValue());
                 }
                 break;
 
@@ -105,19 +112,22 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
         return true;
     }
 
-    private void startCooldown(Long cooldown,Button card){
+    private void startCooldown(Long cooldown){
         new CountDownTimer(cooldown * 1000,100){
             @Override
             public void onTick(long ms) {
-                card.setEnabled(false);
+                listPlayerCard.forEach(c ->c.setEnabled(false));
                 if (Math.round((float)ms / 1000.0f) != secondsLeft) {
                     secondsLeft = Math.round((float)ms / 1000.0f);
-                    card.setText(String.valueOf(secondsLeft));
+                    listPlayerCard.forEach(c ->c.setText(String.valueOf(secondsLeft)));
                 }
             }
             @Override
             public void onFinish() {
-                card.setEnabled(true);
+                listPlayerCard.forEach(c->c.setEnabled(true));
+                card1.setText("Basic");
+                card2.setText("Speed");
+                card3.setText("Tank");
             }
         }.start();
     }
