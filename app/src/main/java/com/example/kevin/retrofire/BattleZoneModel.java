@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
 public class BattleZoneModel {
     private int width;
     private int height;
@@ -30,6 +31,8 @@ public class BattleZoneModel {
         this.enemies = new ArrayList<>();
         this.playerCards = new ArrayList<>();
     }
+
+    public List<Card> getPlayerCards () { return playerCards; }
 
     public int getHpBar(){
         return hpBar;
@@ -118,5 +121,14 @@ public class BattleZoneModel {
 
         checkCollision();
         cmpt++;
+    }
+
+    // Change every player's ship Y position depending on the accelerometer Y change
+    public void accelerometerChange(int value) {
+        playerCards.forEach(ship -> {
+            int y =  ship.getShip().getPositionY() + value;
+            if(y + Ship.getHEIGHT() < height && y > 0)
+                ship.getShip().setPositionY(y);
+        });
     }
 }

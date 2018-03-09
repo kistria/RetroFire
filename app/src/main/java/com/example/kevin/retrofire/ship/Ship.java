@@ -95,6 +95,8 @@ public abstract class Ship {
         return positionY;
     }
 
+    public void setPositionY(int y) { this.positionY = y; }
+
     public static int getWIDTH() {
         return WIDTH;
     }
