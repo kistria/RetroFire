@@ -3,6 +3,7 @@ package com.example.kevin.retrofire;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -45,7 +46,10 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
         setContentView(R.layout.activity_retro_fire);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        this.model = new BattleZoneModel();
+        // On récupere le niveau de difficulté
+        Intent intent = getIntent();
+        int difficulty = intent.getIntExtra("difficulty", 300);
+        this.model = new BattleZoneModel(difficulty);
         BattleZoneView view = findViewById(R.id.battleZone);
         view.setModel(this.model);
 

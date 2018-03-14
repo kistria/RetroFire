@@ -1,51 +1,44 @@
 package com.example.kevin.retrofire;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
-public class MenuActivity extends AppCompatActivity {
-
-    private Button b,b1,b2;
+public class MenuActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        b = (Button)findViewById(R.id.button3);
-        b1 = (Button)findViewById(R.id.button4);
-        b2 = (Button)findViewById(R.id.button5);
+        Button easy = findViewById(R.id.easy);
+        Button medium = findViewById(R.id.medium);
+        Button hard = findViewById(R.id.hard);
 
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                newActivity(RetroFire.class);
-            }
-        });
-
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                newActivity(RetroFire.class);
-            }
-        });
-
-
-        b2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                newActivity(RetroFire.class);
-            }
-        });
-
+        easy.setOnClickListener(view -> newActivity(Difficulty.EASY));
+        medium.setOnClickListener(view -> newActivity(Difficulty.MEDIUM));
+        hard.setOnClickListener(view -> newActivity(Difficulty.HARD));
     }
 
-    private void newActivity(Class c) {
-        Intent intent = new Intent(this,c);
+    private void newActivity(Difficulty difficulty) {
+        Intent intent = new Intent(this, RetroFire.class);
+        intent.putExtra("difficulty", difficulty.getValue());
         startActivity(intent);
+    }
+
+    enum Difficulty {
+        EASY(300), MEDIUM(200), HARD(100);
+
+        private final int value;
+
+        Difficulty(int difficulty) {
+            this.value = difficulty;
+        }
+
+        public int getValue() {
+            return value;
+        }
     }
 
 }

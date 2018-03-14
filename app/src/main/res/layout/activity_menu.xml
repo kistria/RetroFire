@@ -6,27 +6,35 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context="com.example.kevin.retrofire.MenuActivity">
 
-<Button
-    android:id="@+id/button3"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Facile"
-    tools:layout_editor_absoluteX="139dp"
-    tools:layout_editor_absoluteY="123dp" />
+    <Button
+        android:id="@+id/easy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/medium"
+        android:layout_marginTop="128dp"
+        android:text="Facile"
+        tools:layout_editor_absoluteX="139dp"
+        tools:layout_editor_absoluteY="123dp" />
 
-<Button
-    android:id="@+id/button4"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Moyen"
-    tools:layout_editor_absoluteX="139dp"
-    tools:layout_editor_absoluteY="202dp" />
+    <Button
+        android:id="@+id/medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="Moyen"
+        tools:layout_editor_absoluteX="139dp"
+        tools:layout_editor_absoluteY="202dp" />
 
-<Button
-    android:id="@+id/button5"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Difficile"
-    tools:layout_editor_absoluteX="139dp"
-    tools:layout_editor_absoluteY="293dp" />
+    <Button
+        android:id="@+id/hard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/medium"
+        android:layout_below="@+id/medium"
+        android:layout_marginTop="65dp"
+        android:text="Difficile"
+        tools:layout_editor_absoluteX="139dp"
+        tools:layout_editor_absoluteY="293dp" />
 </RelativeLayout>

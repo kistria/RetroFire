@@ -7,19 +7,18 @@
         tools:context="com.example.kevin.retrofire.HomeActivity">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:layout_above="@+id/leave"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="149dp"
             android:text="Jouer" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/leave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/button"
+            android:layout_alignEnd="@+id/play"
             android:layout_centerVertical="true"
             android:text="Quitter" />
     </RelativeLayout>

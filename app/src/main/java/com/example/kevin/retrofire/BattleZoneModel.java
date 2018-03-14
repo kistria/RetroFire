@@ -21,13 +21,14 @@ public class BattleZoneModel {
 
     private final List<Ship> enemies;
     private final List<Card> playerCards;
-    private int rateOfEnemySpawn = 200;
+    private int rateOfEnemySpawn;
     private int cmpt = 0;
 
     private int hpBar = 100;
     private int score = 0;
 
-    public BattleZoneModel() {
+    public BattleZoneModel(int rateOfEnemySpawn) {
+        this.rateOfEnemySpawn = rateOfEnemySpawn;
         this.enemies = new ArrayList<>();
         this.playerCards = new ArrayList<>();
     }
