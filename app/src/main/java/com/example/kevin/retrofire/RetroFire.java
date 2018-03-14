@@ -9,16 +9,22 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.kevin.retrofire.card.BasicShipCard;
 import com.example.kevin.retrofire.card.SpeedShipCard;
 import com.example.kevin.retrofire.card.TankShipCard;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class RetroFire extends Activity implements View.OnTouchListener, View.OnDragListener, SensorEventListener {
     private BattleZoneModel model = null;
@@ -29,6 +35,9 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
     private TextView scoreView;
     private SensorManager sensorManager;
     private Sensor accelerometer;
+    private Button card1, card2, card3, card4;
+    private int secondsLeft = 0;
+    private List<Button> listPlayerCard = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +54,13 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
         hp.setProgress(100);
 
         scoreView = findViewById(R.id.score);
+        card1 = findViewById(R.id.card1);
+        card2 = findViewById(R.id.card2);
+        card3 = findViewById(R.id.card3);
+        card4 = findViewById(R.id.card4);
+
+        listPlayerCard.addAll(Arrays.asList(card1, card2, card3, card4));
+
         findViewById(R.id.card1).setOnTouchListener(this);
         findViewById(R.id.card2).setOnTouchListener(this);
         findViewById(R.id.card3).setOnTouchListener(this);
@@ -63,7 +79,7 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
                         Thread.sleep(100);
                         runOnUiThread(() -> {
                             int score = model.getScore();
-                            scoreView.setText(String.format("%06d",  score));
+                            scoreView.setText(String.format("%06d", score));
                             model.setScore(++score);
                             hp.setProgress(model.getHpBar());
                         });
@@ -109,11 +125,17 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
 
             case DragEvent.ACTION_DRAG_ENDED:
                 if (currentCardId.equals("card1")) {
-                    model.addPlayerCard(new BasicShipCard(x, y, Color.BLUE));
+                    BasicShipCard basicCard = new BasicShipCard(x, y, Color.BLUE);
+                    model.addPlayerCard(basicCard);
+                    startCooldown(basicCard.getCooldown().getValue());
                 } else if (currentCardId.equals("card2")) {
-                    model.addPlayerCard(new SpeedShipCard(x, y, Color.BLUE));
-                } else {
-                    model.addPlayerCard(new TankShipCard(x, y, Color.BLUE));
+                    SpeedShipCard speedCard = new SpeedShipCard(x, y, Color.BLUE);
+                    model.addPlayerCard(speedCard);
+                    startCooldown(speedCard.getCooldown().getValue());
+                } else if (currentCardId.equals("card3")) {
+                    TankShipCard tankCard = new TankShipCard(x, y, Color.BLUE);
+                    model.addPlayerCard(tankCard);
+                    startCooldown(tankCard.getCooldown().getValue());
                 }
                 break;
 
@@ -139,13 +161,34 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        if(sensorEvent.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
-            model.accelerometerChange((int)sensorEvent.values[0]-5);
+        if (sensorEvent.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            model.accelerometerChange((int) sensorEvent.values[0] - 5);
         }
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
 
+    }
+
+    private void startCooldown(Long cooldown) {
+        new CountDownTimer(cooldown * 1000, 100) {
+            @Override
+            public void onTick(long ms) {
+                listPlayerCard.forEach(c -> c.setEnabled(false));
+                if (Math.round((float) ms / 1000.0f) != secondsLeft) {
+                    secondsLeft = Math.round((float) ms / 1000.0f);
+                    listPlayerCard.forEach(c -> c.setText(String.valueOf(secondsLeft)));
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                listPlayerCard.forEach(c -> c.setEnabled(true));
+                card1.setText("Basic");
+                card2.setText("Speed");
+                card3.setText("Tank");
+            }
+        }.start();
     }
 }

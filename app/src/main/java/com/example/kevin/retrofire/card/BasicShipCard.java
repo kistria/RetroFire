@@ -22,4 +22,9 @@ public class BasicShipCard implements Card {
     public Ship getShip() {
         return basicShip;
     }
+
+    @Override
+    public Cooldown getCooldown() {
+        return Cooldown.NORMAL;
+    }
 }

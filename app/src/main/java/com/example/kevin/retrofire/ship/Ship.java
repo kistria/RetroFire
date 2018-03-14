@@ -144,4 +144,5 @@ public abstract class Ship {
     public enum Direction {
         LEFT, RIGHT
     }
+
 }
