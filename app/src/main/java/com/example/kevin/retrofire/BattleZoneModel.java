@@ -24,7 +24,7 @@ public class BattleZoneModel {
     private int rateOfEnemySpawn = 200;
     private int cmpt = 0;
 
-    private int hpBar = 100;
+    private int hpBar = 10;
     private int score = 0;
 
     public BattleZoneModel() {

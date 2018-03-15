@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 
 public class GameLoopThread extends Thread {
-    private final static int MAX_FPS = 50;
+    private final static int MAX_FPS = 30;
     private final static int FRAME_PERIOD = 1000 / MAX_FPS;
 
     private final BattleZoneView view;

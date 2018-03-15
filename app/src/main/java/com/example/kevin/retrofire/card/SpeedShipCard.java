@@ -22,4 +22,9 @@ public class SpeedShipCard implements Card {
     public Ship getShip() {
         return speedShip;
     }
+
+    @Override
+    public Cooldown getCooldown() {
+        return Cooldown.NORMAL;
+    }
 }
