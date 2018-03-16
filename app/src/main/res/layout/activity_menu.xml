@@ -1,40 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context="com.example.kevin.retrofire.MenuActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:gravity="center"
+    android:orientation="horizontal"
+    tools:context="com.example.kevin.retrofire.MenuActivity">
 
     <Button
         android:id="@+id/easy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/medium"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button"
+        android:shadowColor="#0F0F0F"
         android:text="Facile"
-        tools:layout_editor_absoluteX="139dp"
-        tools:layout_editor_absoluteY="123dp" />
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/button"
+        android:shadowColor="#0F0F0F"
         android:text="Moyen"
-        tools:layout_editor_absoluteX="139dp"
-        tools:layout_editor_absoluteY="202dp" />
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/hard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/medium"
-        android:layout_below="@+id/medium"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="170dp"
+        android:background="@drawable/button"
+        android:shadowColor="#0F0F0F"
         android:text="Difficile"
-        tools:layout_editor_absoluteX="139dp"
-        tools:layout_editor_absoluteY="293dp" />
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
 </RelativeLayout>

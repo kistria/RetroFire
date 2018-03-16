@@ -18,7 +18,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Button;
 
 import com.example.kevin.retrofire.card.BasicShipCard;
 import com.example.kevin.retrofire.card.SpeedShipCard;
@@ -29,7 +28,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class RetroFire extends Activity implements View.OnTouchListener, View.OnDragListener, SensorEventListener {
-    protected  volatile boolean running = true;
+    protected volatile boolean running = true;
     private BattleZoneModel model = null;
     private int x;
     private int y;
@@ -88,7 +87,7 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
                             scoreView.setText(String.format("%06d", score));
                             model.setScore(++score);
                             hp.setProgress(model.getHpBar());
-                            if(model.getHpBar() <= 0){
+                            if (model.getHpBar() <= 0) {
                                 Intent intent = new Intent(RetroFire.this, EndGameMenuActivity.class);
                                 running = false;
                                 startActivity(intent);
@@ -102,7 +101,6 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
         };
         t.start();
     }
-
 
 
     @Override
@@ -141,12 +139,12 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
                     model.addPlayerCard(basicCard);
                     startCooldown(basicCard.getCooldown().getValue());
                 } else if (currentCardId.equals("card2")) {
-                    SpeedShipCard speedCard =new SpeedShipCard(x, y, Color.BLUE);
+                    SpeedShipCard speedCard = new SpeedShipCard(x, y, Color.BLUE);
 
                     model.addPlayerCard(speedCard);
                     startCooldown(speedCard.getCooldown().getValue());
                 } else if (currentCardId.equals("card3")) {
-                    TankShipCard tankCard =new TankShipCard(x, y, Color.BLUE);
+                    TankShipCard tankCard = new TankShipCard(x, y, Color.BLUE);
                     model.addPlayerCard(tankCard);
                     startCooldown(tankCard.getCooldown().getValue());
                 }

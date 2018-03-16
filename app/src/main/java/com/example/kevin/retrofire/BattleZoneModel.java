@@ -33,15 +33,21 @@ public class BattleZoneModel {
         this.playerCards = new ArrayList<>();
     }
 
-    public List<Card> getPlayerCards () { return playerCards; }
+    public List<Card> getPlayerCards() {
+        return playerCards;
+    }
 
-    public int getHpBar(){
+    public int getHpBar() {
         return hpBar;
     }
 
-    public int getScore () {return score;}
+    public int getScore() {
+        return score;
+    }
 
-    public void setScore (int score) { this.score = score;}
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     public void setWidth(int width) {
         this.width = width;
@@ -79,8 +85,8 @@ public class BattleZoneModel {
 
         // lose life when an enemy reach the left side
         enemies.forEach(enemy -> {
-            if(enemy.checkEdgesCollision(width, height)){
-                hpBar-=10;
+            if (enemy.checkEdgesCollision(width, height)) {
+                hpBar -= 10;
             }
         });
         //Check enemies edges collision
@@ -94,6 +100,10 @@ public class BattleZoneModel {
 
         //Check enemy hit player card
         enemies.forEach(enemies -> playerCards.forEach(card -> enemies.getWeapon().hasHit(card.getShip())));
+    }
+
+    public boolean gameIsFinish() {
+        return hpBar <= 0;
     }
 
     public void update() {
@@ -127,8 +137,8 @@ public class BattleZoneModel {
     // Change every player's ship Y position depending on the accelerometer Y change
     public void accelerometerChange(int value) {
         playerCards.forEach(ship -> {
-            int y =  ship.getShip().getPositionY() + value;
-            if(y + Ship.getHEIGHT() < height && y > 0)
+            int y = ship.getShip().getPositionY() + value;
+            if (y + Ship.getHEIGHT() < height && y > 0)
                 ship.getShip().setPositionY(y);
         });
     }

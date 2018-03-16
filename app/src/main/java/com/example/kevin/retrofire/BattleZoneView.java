@@ -4,6 +4,7 @@ package com.example.kevin.retrofire;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -26,10 +27,15 @@ public class BattleZoneView extends SurfaceView implements SurfaceHolder.Callbac
         this.model = model;
     }
 
+    public BattleZoneModel getModel() {
+        return model;
+    }
+
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         model.setHeight(this.getHeight());
         model.setWidth(this.getWidth());
+
         thread.setRunning(true);
         thread.start();
     }

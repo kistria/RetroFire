@@ -32,6 +32,11 @@ public class GameLoopThread extends Thread {
                 synchronized (surfaceHolder) {
                     long startTime = System.currentTimeMillis();
 
+                    if (view.getModel().gameIsFinish()) {
+                        isRunning = false;
+                        continue;
+                    }
+
                     view.update();
 
                     view.draw(canvas);
