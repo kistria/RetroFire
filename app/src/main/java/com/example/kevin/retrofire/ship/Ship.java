@@ -41,21 +41,21 @@ public abstract class Ship {
     }
 
     public boolean checkShipCollision(Ship ship) {
-        if (Ship.Direction.LEFT == direction) {
-            if (positionX <= ship.getPositionX() + getWIDTH() && positionX >= ship.getPositionX() && positionY >= ship.getPositionY() && positionY <= ship.getPositionY() + getHEIGHT()) {
-                return true;
-            } else if (positionX <= ship.getPositionX() + getWIDTH() && positionX >= ship.getPositionX() && positionY + HEIGHT >= ship.getPositionY() && positionY + HEIGHT <= ship.getPositionY() + getHEIGHT()) {
-                return true;
-            }
-        } else {
-            if (positionX + WIDTH >= ship.getPositionX() && positionX + WIDTH <= ship.getPositionX() + getWIDTH() && positionY >= ship.getPositionY() && positionY <= ship.getPositionY() + getHEIGHT()) {
-                return true;
-            } else if (positionX + WIDTH >= ship.getPositionX() && positionX + WIDTH <= ship.getPositionX() + getWIDTH() && positionY + HEIGHT >= ship.getPositionY() && positionY + HEIGHT <= ship.getPositionY() + getHEIGHT()) {
-                return true;
-            }
+        if (positionX <= ship.getPositionX() + WIDTH && positionX >= ship.getPositionX() && positionY >= ship.getPositionY() && positionY <= ship.getPositionY() + HEIGHT) {
+            return true;
+        } else if (positionX + WIDTH <= ship.getPositionX() + WIDTH && positionX + WIDTH >= ship.getPositionX() && positionY >= ship.getPositionY() && positionY <= ship.getPositionY() + HEIGHT) {
+            return true;
+        } else if (positionX + WIDTH <= ship.getPositionX() + WIDTH && positionX + WIDTH >= ship.getPositionX() && positionY + HEIGHT >= ship.getPositionY() && positionY + HEIGHT <= ship.getPositionY() + HEIGHT) {
+            return true;
+        } else if (positionX <= ship.getPositionX() + WIDTH && positionX >= ship.getPositionX() && positionY + HEIGHT >= ship.getPositionY() && positionY + HEIGHT <= ship.getPositionY() + HEIGHT) {
+            return true;
         }
 
         return false;
+    }
+
+    public void destroy() {
+        this.life = 0;
     }
 
     public void update(int width, int height) {
@@ -95,7 +95,9 @@ public abstract class Ship {
         return positionY;
     }
 
-    public void setPositionY(int y) { this.positionY = y; }
+    public void setPositionY(int y) {
+        this.positionY = y;
+    }
 
     public static int getWIDTH() {
         return WIDTH;

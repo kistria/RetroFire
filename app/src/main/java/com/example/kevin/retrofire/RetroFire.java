@@ -102,13 +102,12 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
         t.start();
     }
 
-
     @Override
     public boolean onTouch(View view, MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             ClipData data = ClipData.newPlainText("", "");
             View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
-            view.startDragAndDrop(data, shadowBuilder, view, 0);
+            view.startDrag(data, shadowBuilder, view, 0);
             currentCardId = view.getResources().getResourceEntryName(view.getId());
             return true;
         } else {
@@ -186,16 +185,22 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
         new CountDownTimer(cooldown * 1000, 100) {
             @Override
             public void onTick(long ms) {
-                listPlayerCard.forEach(c -> c.setEnabled(false));
+                for (Button button : listPlayerCard) {
+                    button.setEnabled(false);
+                }
                 if (Math.round((float) ms / 1000.0f) != secondsLeft) {
                     secondsLeft = Math.round((float) ms / 1000.0f);
-                    listPlayerCard.forEach(c -> c.setText(String.valueOf(secondsLeft)));
+                    for (Button c : listPlayerCard) {
+                        c.setText(String.valueOf(secondsLeft));
+                    }
                 }
             }
 
             @Override
             public void onFinish() {
-                listPlayerCard.forEach(c -> c.setEnabled(true));
+                for (Button c : listPlayerCard) {
+                    c.setEnabled(true);
+                }
                 card1.setText("Basic");
                 card2.setText("Speed");
                 card3.setText("Tank");

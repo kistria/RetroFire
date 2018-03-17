@@ -4,6 +4,7 @@ package com.example.kevin.retrofire.ship;
 import android.graphics.Canvas;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Weapon {
@@ -28,22 +29,33 @@ public class Weapon {
     }
 
     public void draw(Canvas canvas) {
-        missiles.forEach(missile -> missile.draw(canvas));
+        for (Missile missile : missiles) {
+            missile.draw(canvas);
+        }
     }
 
     public void update(int width, int height) {
-        missiles.forEach(Missile::update);
-        missiles.removeIf(missile -> missile.checkEdgesCollision(width, height));
+        for (Missile missile : missiles) {
+            missile.update();
+        }
+
+        for (Iterator<Missile> it = missiles.iterator(); it.hasNext(); ) {
+            if (it.next().checkEdgesCollision(width, height)) {
+                it.remove();
+            }
+        }
     }
 
     public boolean hasHit(Ship ship) {
-        return missiles.removeIf(missile -> {
-            boolean hit = missile.hasHit(ship);
+        boolean hit = false;
+        for (Iterator<Missile> it = missiles.iterator(); it.hasNext(); ) {
+            hit = it.next().hasHit(ship);
             if (hit) {
+                it.remove();
                 ship.takeDamage(firePower.value);
             }
-            return hit;
-        });
+        }
+        return hit;
     }
 
     public int nbMissile() {
