@@ -50,9 +50,11 @@ public class Weapon {
         boolean hit = false;
         for (Iterator<Missile> it = missiles.iterator(); it.hasNext(); ) {
             hit = it.next().hasHit(ship);
-            if (hit) {
+            if (hit && !ship.isDead()) {
                 it.remove();
                 ship.takeDamage(firePower.value);
+            } else {
+                hit = false;
             }
         }
         return hit;
