@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/button"
         android:shadowColor="#0F0F0F"
-        android:text="Rejouer"
+        android:text="@string/replay"
         android:textColor="#FFFFFF"
         android:textSize="20sp" />
 
@@ -27,7 +27,7 @@
         android:layout_marginTop="70dp"
         android:background="@drawable/button"
         android:shadowColor="#0F0F0F"
-        android:text="Quitter"
+        android:text="@string/leave"
         android:textColor="#FFFFFF"
         android:textSize="20sp" />
 

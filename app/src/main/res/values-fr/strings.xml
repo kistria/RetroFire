@@ -1,0 +1,10 @@
+<resources>
+    <string name="play">Jouer</string>
+    <string name="leave">Quitter</string>
+    <string name="easy">Facile</string>
+    <string name="medium">Moyen</string>
+    <string name="hard">Difficile</string>
+    <string name="start">Commencer</string>
+    <string name="player_name">Entrer votre pseudo :</string>
+    <string name="replay">Rejouer</string>
+</resources>
