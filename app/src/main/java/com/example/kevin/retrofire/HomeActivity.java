@@ -13,11 +13,13 @@ public class HomeActivity extends Activity {
 
         Button play = findViewById(R.id.play);
         Button leave = findViewById(R.id.leave);
+        Button highscore = findViewById(R.id.highscore);
 
         leave.setOnClickListener(view -> {
             finish();
         });
 
+        highscore.setOnClickListener(view -> newActivity(HighScoreActivity.class));
         play.setOnClickListener(view -> newActivity(MenuActivity.class));
     }
 

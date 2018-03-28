@@ -28,7 +28,7 @@ public class MenuActivity extends Activity {
     }
 
     enum Difficulty {
-        EASY(300), MEDIUM(200), HARD(100);
+        EASY(300), MEDIUM(200), HARD(80);
 
         private final int value;
 

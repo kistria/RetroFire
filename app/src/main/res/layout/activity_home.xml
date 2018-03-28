@@ -12,20 +12,32 @@
             android:id="@+id/play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Jouer"
+            android:background="@drawable/button"
+            android:text="Play"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
-            android:background="@drawable/button"
-            android:shadowColor="#0F0F0F"/>
+            android:shadowColor="#0F0F0F"
+            android:layout_marginTop="30dp"/>
 
-        <Button
-            android:id="@+id/leave"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
-            android:text="Quitter"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:background="@drawable/button"
-            android:shadowColor="#0F0F0F"/>
+    <Button
+        android:id="@+id/highscore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/button"
+        android:shadowColor="#0F0F0F"
+        android:text="High Score"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"/>
+
+    <Button
+        android:id="@+id/leave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="170dp"
+        android:background="@drawable/button"
+        android:shadowColor="#0F0F0F"
+        android:text="Leave"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
     </RelativeLayout>
