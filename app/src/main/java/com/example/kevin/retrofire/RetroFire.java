@@ -38,6 +38,7 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
     private SensorManager sensorManager;
     private Sensor accelerometer;
     private Button card1, card2, card3, card4;
+    private TextView tvPseudo;
     private int secondsLeft = 0;
     private List<Button> listPlayerCard = new ArrayList<>();
 
@@ -50,9 +51,14 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
         // On récupere le niveau de difficulté
         Intent intent = getIntent();
         int difficulty = intent.getIntExtra("difficulty", 300);
+        String pseudo = intent.getStringExtra("pseudo");
+
         this.model = new BattleZoneModel(difficulty);
         BattleZoneView view = findViewById(R.id.battleZone);
         view.setModel(this.model);
+
+       // tvPseudo = findViewById(R.id.pseudo);
+        //tvPseudo.setText(pseudo);
 
         hp = findViewById(R.id.hp);
         hp.setMax(100);
