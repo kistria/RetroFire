@@ -9,25 +9,39 @@
     tools:context="com.example.kevin.retrofire.EnterNameActivity">
 
     <TextView
+        android:id="@+id/name_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:textColor="#FFFFFF"
-        android:text="@string/player_name"/>
+        android:gravity="center_horizontal"
+        android:text="@string/player_name"
+        />
+
+
     <EditText
         android:id="@+id/player_name"
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:digits="@string/input_filter"
+        android:gravity="center"
+        android:hint="@string/input_player_name"
+        android:inputType="textFilter"
+        android:maxLength="15"
         android:textColor="#FFFFFF"
-        />
+        android:textColorHint="#b20000" />
+
     <Button
         android:id="@+id/start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/player_name"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button"
+        android:shadowColor="#0F0F0F"
         android:text="@string/start"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
         android:layout_marginTop="70dp"
-        android:background="@drawable/button"
-        android:shadowColor="#0F0F0F"/>
+        android:textSize="20sp" />
 </RelativeLayout>

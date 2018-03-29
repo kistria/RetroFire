@@ -7,4 +7,5 @@
     <string name="start">Commencer</string>
     <string name="player_name">Entrer votre pseudo :</string>
     <string name="replay">Rejouer</string>
+    <string name="input_player_name">15 caractères max</string>
 </resources>

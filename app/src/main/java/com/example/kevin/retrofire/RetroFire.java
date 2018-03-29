@@ -57,8 +57,8 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
         BattleZoneView view = findViewById(R.id.battleZone);
         view.setModel(this.model);
 
-       // tvPseudo = findViewById(R.id.pseudo);
-        //tvPseudo.setText(pseudo);
+        tvPseudo = findViewById(R.id.pseudo);
+        tvPseudo.setText(pseudo);
 
         hp = findViewById(R.id.hp);
         hp.setMax(100);

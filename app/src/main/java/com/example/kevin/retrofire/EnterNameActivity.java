@@ -8,6 +8,8 @@ import android.widget.EditText;
 
 public class EnterNameActivity extends Activity{
 
+    private String language;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,12 +18,20 @@ public class EnterNameActivity extends Activity{
         EditText pseudo = findViewById(R.id.player_name);
         Button start = findViewById(R.id.start);
 
+        language = this.getResources().getConfiguration().locale.getDisplayLanguage();
 
         start.setOnClickListener(view -> newActivity(pseudo.getText().toString()));
     }
 
     private void newActivity(String pseudo) {
         Intent intent = new Intent(this, RetroFire.class);
+        if(pseudo.isEmpty()){
+            if(language.equals("français")){
+                pseudo = "JoueurInconnu";
+            } else {
+                pseudo = "UnknownPlayer";
+            }
+        }
         intent.putExtra("pseudo", pseudo);
         startActivity(intent);
     }
