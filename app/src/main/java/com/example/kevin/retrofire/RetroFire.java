@@ -95,6 +95,7 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
                             hp.setProgress(model.getHpBar());
                             if (model.getHpBar() <= 0) {
                                 Intent intent = new Intent(RetroFire.this, EndGameMenuActivity.class);
+                                intent.putExtra("pseudo", tvPseudo.getText().toString());
                                 running = false;
                                 startActivity(intent);
                             }
