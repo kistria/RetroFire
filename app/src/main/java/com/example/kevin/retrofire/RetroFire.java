@@ -146,6 +146,10 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
                     TankShipCard tankCard = new TankShipCard(x, y, Color.BLUE);
                     model.addPlayerCard(tankCard);
                     startCooldown(tankCard.getCooldown().getValue());
+                } else if (currentCardId.equals("card4")) {
+                    BasicShipCard basicCard = new BasicShipCard(x, y, Color.BLUE);
+                    model.addPlayerCard(basicCard);
+                    startCooldown(basicCard.getCooldown().getValue());
                 }
                 break;
 
@@ -204,6 +208,7 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
                 card1.setText("Basic");
                 card2.setText("Speed");
                 card3.setText("Tank");
+                card4.setText("Basic");
             }
         }.start();
     }

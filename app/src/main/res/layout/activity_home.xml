@@ -15,8 +15,19 @@
             android:text="@string/play"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
-            android:background="@drawable/button"
-            android:shadowColor="#0F0F0F"/>
+            android:shadowColor="#0F0F0F"
+            android:layout_marginTop="30dp"/>
+
+    <Button
+        android:id="@+id/highscore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/button"
+        android:shadowColor="#0F0F0F"
+        android:text="High Score"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"/>
 
         <Button
             android:id="@+id/leave"

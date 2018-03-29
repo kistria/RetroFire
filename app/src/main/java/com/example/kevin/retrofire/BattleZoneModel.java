@@ -169,7 +169,7 @@ public class BattleZoneModel {
     // Change every player's ship Y position depending on the accelerometer Y change
     public void accelerometerChange(int value) {
         for (Card ship : playerCards) {
-            int y = ship.getShip().getPositionY() + value;
+            int y = ship.getShip().getPositionY() + (value*2);
             if (y + Ship.getHEIGHT() < height && y > 0)
                 ship.getShip().setPositionY(y);
         }
