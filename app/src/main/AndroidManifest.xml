@@ -14,6 +14,8 @@
         </activity>
         <activity android:name=".MenuActivity" android:screenOrientation="landscape">
         </activity>
+        <activity android:name=".EnterNameActivity">
+        </activity>
         <activity android:name=".HighScoreActivity" android:screenOrientation="landscape">
         </activity>
         <activity android:name=".HomeActivity" android:screenOrientation="landscape">

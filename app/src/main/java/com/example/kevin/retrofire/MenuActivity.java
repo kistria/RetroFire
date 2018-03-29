@@ -22,7 +22,7 @@ public class MenuActivity extends Activity {
     }
 
     private void newActivity(Difficulty difficulty) {
-        Intent intent = new Intent(this, RetroFire.class);
+        Intent intent = new Intent(this, EnterNameActivity.class);
         intent.putExtra("difficulty", difficulty.getValue());
         startActivity(intent);
     }
