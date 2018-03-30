@@ -30,10 +30,10 @@ def addScoreToFile(score, name):
 def highScore():
     if(request.method == 'GET'):
         result = getScoreInFile()
-        return jsonify(result)
-    addScoreToFile(request.form['score'], request.form['username'])
+        return result
+    addScoreToFile(request.json['score'], request.json['username'])
     return json.dumps({'success':True}), 200
 
 if __name__ == '__main__':
-     app.run(host='192.168.1.23', port='5002')
+     app.run(host='192.168.0.18', port=5002)
 

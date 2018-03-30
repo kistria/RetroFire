@@ -8,6 +8,7 @@
     <string name="start">Start</string>
     <string name="player_name">Enter your name:</string>
     <string name="replay">Replay</string>
+    <string name="home">Home</string>
     <string name="input_filter">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890</string>
     <string name="input_player_name">15 characters max</string>
 </resources>

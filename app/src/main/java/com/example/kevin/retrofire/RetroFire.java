@@ -11,6 +11,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,6 +27,7 @@ import com.example.kevin.retrofire.card.TankShipCard;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class RetroFire extends Activity implements View.OnTouchListener, View.OnDragListener, SensorEventListener {
     protected volatile boolean running = true;
@@ -41,6 +43,7 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
     private TextView tvPseudo;
     private int secondsLeft = 0;
     private List<Button> listPlayerCard = new ArrayList<>();
+    private ScoreRestService scoreRestService = new ScoreRestService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,18 +90,17 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
             public void run() {
                 try {
                     while (running) {
-                        Thread.sleep(100);
+
                         runOnUiThread(() -> {
                             int score = model.getScore();
                             scoreView.setText(String.format("%06d", score));
                             model.setScore(++score);
                             hp.setProgress(model.getHpBar());
                             if (model.getHpBar() <= 0) {
-                                Intent intent = new Intent(RetroFire.this, EndGameMenuActivity.class);
-                                running = false;
-                                startActivity(intent);
+                                endGame(score, pseudo);
                             }
                         });
+                        Thread.sleep(100);
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -106,6 +108,19 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
             }
         };
         t.start();
+    }
+
+    private void endGame(int score, String pseudo) {
+        Intent intent = new Intent(RetroFire.this, EndGameMenuActivity.class);
+        running = false;
+        try {
+            scoreRestService.sendScore(pseudo, String.valueOf(score));
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        startActivity(intent);
     }
 
     @Override

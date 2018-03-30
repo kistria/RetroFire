@@ -13,10 +13,17 @@ public class EndGameMenuActivity extends Activity {
         setContentView(R.layout.activity_menu_end);
 
         Button replay = findViewById(R.id.replay);
+        Button home = findViewById(R.id.home);
         Button leave = findViewById(R.id.leave);
+
 
         replay.setOnClickListener(view -> {
             Intent intent = new Intent(this, RetroFire.class);
+            startActivity(intent);
+        });
+
+        home.setOnClickListener(view -> {
+            Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
         });
 
