@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -11,6 +12,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -30,6 +32,9 @@ import java.util.List;
 public class RetroFire extends Activity implements View.OnTouchListener, View.OnDragListener, SensorEventListener {
     protected volatile boolean running = true;
     private BattleZoneModel model = null;
+    private ReachScore br = new ReachScore();
+    private IntentFilter filter;
+    private int threshold =1000;
     private int x;
     private int y;
     private String currentCardId;
@@ -52,6 +57,8 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
         Intent intent = getIntent();
         int difficulty = intent.getIntExtra("difficulty", 300);
         String pseudo = intent.getStringExtra("pseudo");
+
+        filter = new IntentFilter("ACTION_REACH_SCORE");
 
         this.model = new BattleZoneModel(difficulty);
         BattleZoneView view = findViewById(R.id.battleZone);
@@ -93,6 +100,11 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
                             scoreView.setText(String.format("%06d", score));
                             model.setScore(++score);
                             hp.setProgress(model.getHpBar());
+                            if(score == threshold){
+                                filter.addAction("ACTION_REACH_SCORE");
+                                sendBroadcast(new Intent("ACTION_REACH_SCORE").putExtra("scoreReach",score));
+                                threshold += 1000;
+                            }
                             if (model.getHpBar() <= 0) {
                                 Intent intent = new Intent(RetroFire.this, EndGameMenuActivity.class);
                                 intent.putExtra("pseudo", tvPseudo.getText().toString());
@@ -172,12 +184,14 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
     protected void onResume() {
         super.onResume();
         sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
+        registerReceiver(br,filter);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         sensorManager.unregisterListener(this);
+        unregisterReceiver(br);
     }
 
     @Override

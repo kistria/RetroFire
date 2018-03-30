@@ -10,24 +10,35 @@
         android:screenOrientation="landscape"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RetroFire" android:screenOrientation="landscape">
-        </activity>
-        <activity android:name=".MenuActivity" android:screenOrientation="landscape">
-        </activity>
-        <activity android:name=".EnterNameActivity">
-        </activity>
-        <activity android:name=".HighScoreActivity" android:screenOrientation="landscape">
-        </activity>
-        <activity android:name=".HomeActivity" android:screenOrientation="landscape">
+        <activity
+            android:name=".RetroFire"
+            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".MenuActivity"
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".EnterNameActivity"></activity>
+        <activity
+            android:name=".HighScoreActivity"
+            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".HomeActivity"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".EndGameMenuActivity" android:screenOrientation="landscape">
+        <activity
+            android:name=".EndGameMenuActivity"
+            android:screenOrientation="landscape">
 
         </activity>
+
+        <receiver
+            android:name=".ReachScore"
+            android:enabled="true"
+            android:exported="true"></receiver>
     </application>
 
 </manifest>
