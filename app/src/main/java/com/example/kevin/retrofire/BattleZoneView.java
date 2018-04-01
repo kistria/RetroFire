@@ -4,7 +4,6 @@ package com.example.kevin.retrofire;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -19,7 +18,6 @@ public class BattleZoneView extends SurfaceView implements SurfaceHolder.Callbac
 
         // Permet l'appel aux méthodes surfaceCreated, changed et destroyed.
         getHolder().addCallback(this);
-
         setWillNotDraw(false);
     }
 
@@ -42,7 +40,6 @@ public class BattleZoneView extends SurfaceView implements SurfaceHolder.Callbac
 
     @Override
     public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-
     }
 
     @Override

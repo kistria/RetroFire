@@ -10,7 +10,6 @@ import com.example.kevin.retrofire.ship.BasicShip;
 import com.example.kevin.retrofire.ship.Ship;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -106,15 +105,12 @@ public class BattleZoneModel {
         }
 
         //Check ship collision
-        for (Iterator<Card> it = playerCards.iterator(); it.hasNext(); ) {
-            Card cardTemp = it.next();
-
+        for (Card cardTemp : playerCards) {
             if (cardTemp.getShip().isDead()) {
                 continue;
             }
 
-            for (Iterator<Ship> it2 = enemies.iterator(); it2.hasNext(); ) {
-                Ship shipTemp = it2.next();
+            for (Ship shipTemp : enemies) {
                 if (!shipTemp.isDead() && shipTemp.checkShipCollision(cardTemp.getShip())) {
                     cardTemp.getShip().destroy();
                     shipTemp.destroy();
@@ -169,7 +165,7 @@ public class BattleZoneModel {
     // Change every player's ship Y position depending on the accelerometer Y change
     public void accelerometerChange(int value) {
         for (Card ship : playerCards) {
-            int y = ship.getShip().getPositionY() + (value*2);
+            int y = ship.getShip().getPositionY() + (value * 2);
             if (y + Ship.getHEIGHT() < height && y > 0)
                 ship.getShip().setPositionY(y);
         }
