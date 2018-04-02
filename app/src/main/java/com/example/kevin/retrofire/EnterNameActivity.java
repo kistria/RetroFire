@@ -19,11 +19,13 @@ public class EnterNameActivity extends Activity{
         Button start = findViewById(R.id.start);
 
         language = this.getResources().getConfiguration().locale.getDisplayLanguage();
+        Intent intent = getIntent();
+        int difficulty = intent.getIntExtra("difficulty", 300);
 
-        start.setOnClickListener(view -> newActivity(pseudo.getText().toString()));
+        start.setOnClickListener(view -> newActivity(pseudo.getText().toString(), difficulty));
     }
 
-    private void newActivity(String pseudo) {
+    private void newActivity(String pseudo, int difficulty) {
         Intent intent = new Intent(this, RetroFire.class);
         if(pseudo.isEmpty()){
             if(language.equals("français")){
@@ -33,6 +35,7 @@ public class EnterNameActivity extends Activity{
             }
         }
         intent.putExtra("pseudo", pseudo);
+        intent.putExtra("difficulty", difficulty);
         startActivity(intent);
     }
 }

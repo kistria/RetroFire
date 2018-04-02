@@ -3,7 +3,6 @@ package com.example.kevin.retrofire;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 
 public class EndGameMenuActivity extends Activity {
@@ -15,15 +14,23 @@ public class EndGameMenuActivity extends Activity {
         setContentView(R.layout.activity_menu_end);
 
         Button replay = findViewById(R.id.replay);
+        Button home = findViewById(R.id.home);
         Button leave = findViewById(R.id.leave);
 
         Intent intent = getIntent();
         pseudo = intent.getStringExtra("pseudo");
+        int difficulty = intent.getIntExtra("difficulty", 200);
 
         replay.setOnClickListener(view -> {
             Intent intentReplay = new Intent(this, RetroFire.class);
             intentReplay.putExtra("pseudo", pseudo);
+            intentReplay.putExtra("difficulty", difficulty);
             startActivity(intentReplay);
+        });
+
+        home.setOnClickListener(view -> {
+            Intent intentHome = new Intent(this, HomeActivity.class);
+            startActivity(intentHome);
         });
 
         leave.setOnClickListener(view -> {

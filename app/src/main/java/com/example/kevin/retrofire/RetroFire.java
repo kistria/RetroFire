@@ -12,7 +12,6 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,6 +27,7 @@ import com.example.kevin.retrofire.card.TankShipCard;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class RetroFire extends Activity implements View.OnTouchListener, View.OnDragListener, SensorEventListener {
     protected volatile boolean running = true;
@@ -46,6 +46,7 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
     private TextView tvPseudo;
     private int secondsLeft = 0;
     private List<Button> listPlayerCard = new ArrayList<>();
+    private ScoreRestService scoreRestService = new ScoreRestService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
 
         // On récupere le niveau de difficulté
         Intent intent = getIntent();
-        int difficulty = intent.getIntExtra("difficulty", 300);
+        int difficulty = intent.getIntExtra("difficulty", 200);
         String pseudo = intent.getStringExtra("pseudo");
 
         filter = new IntentFilter("ACTION_REACH_SCORE");
@@ -94,7 +95,6 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
             public void run() {
                 try {
                     while (running) {
-                        Thread.sleep(100);
                         runOnUiThread(() -> {
                             int score = model.getScore();
                             scoreView.setText(String.format("%06d", score));
@@ -106,12 +106,10 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
                                 threshold += 1000;
                             }
                             if (model.getHpBar() <= 0) {
-                                Intent intent = new Intent(RetroFire.this, EndGameMenuActivity.class);
-                                intent.putExtra("pseudo", tvPseudo.getText().toString());
-                                running = false;
-                                startActivity(intent);
+                                endGame(score, pseudo, difficulty);
                             }
                         });
+                        Thread.sleep(100);
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -119,6 +117,21 @@ public class RetroFire extends Activity implements View.OnTouchListener, View.On
             }
         };
         t.start();
+    }
+
+    private void endGame(int score, String pseudo, int difficulty) {
+        Intent intent = new Intent(RetroFire.this, EndGameMenuActivity.class);
+        intent.putExtra("pseudo", tvPseudo.getText().toString());
+        intent.putExtra("difficulty", difficulty);
+        running = false;
+        try {
+            scoreRestService.sendScore(pseudo, String.valueOf(score));
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        startActivity(intent);
     }
 
     @Override
