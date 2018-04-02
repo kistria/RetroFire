@@ -8,9 +8,9 @@
     tools:context="com.example.kevin.retrofire.RetroFire">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="0"
         android:orientation="vertical">
 
         <TextView
@@ -19,38 +19,45 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="RetroFire"
+            android:padding="10dp"
             android:textColor="@android:color/background_light" />
 
-        <ImageButton
+        <Button
             android:id="@+id/card1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="1" />
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:text="Basic" />
 
-        <ImageButton
+        <Button
             android:id="@+id/card2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="Speed"/>
 
-        <ImageButton
+        <Button
             android:id="@+id/card3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="Tank"/>
 
-        <ImageButton
+        <Button
             android:id="@+id/card4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="Basic" />
 
     </LinearLayout>
 
@@ -61,35 +68,55 @@
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_weight="5">
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-
-    <ProgressBar
-            android:id="@+id/hp"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/pseudo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Choco"
-            android:textColor="@android:color/background_light" />
 
-        <TextView
-            android:id="@+id/score"
+            <ProgressBar
+                android:id="@+id/hp"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:visibility="visible"
+                android:progressDrawable="@drawable/progress_bar"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginBottom="10dp"
+                android:paddingTop="1dp"
+                tools:visibility="visible"/>
+
+            <TextView
+                android:id="@+id/pseudo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textColor="@android:color/background_light" />
+
+            <TextView
+                android:id="@+id/score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:layout_margin="10dp"
+                android:textColor="@android:color/background_light" />
+
+        </LinearLayout>
+
+        <com.example.kevin.retrofire.BattleZoneView
+            android:id="@+id/battleZone"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Score : 99999"
-            android:textColor="@android:color/background_light" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

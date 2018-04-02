@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        android:orientation="horizontal"
+        android:gravity="center"
+        tools:context="com.example.kevin.retrofire.HomeActivity">
+
+        <Button
+            android:id="@+id/play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button"
+            android:layout_marginTop="30dp"
+            android:text="@string/play"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:shadowColor="#0F0F0F" />
+
+    <Button
+        android:id="@+id/highscore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/button"
+        android:shadowColor="#0F0F0F"
+        android:text="@string/high_score"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/leave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="170dp"
+            android:text="@string/leave"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:background="@drawable/button"
+            android:shadowColor="#0F0F0F"/>
+    </RelativeLayout>
